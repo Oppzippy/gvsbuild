@@ -1,14 +1,8 @@
-Subject: [PATCH] Revert "AdwAboutWindow: Add new_from_appdata constructor"
----
-Index: .gitlab-ci/fedora.Dockerfile
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
 diff --git a/.gitlab-ci/fedora.Dockerfile b/.gitlab-ci/fedora.Dockerfile
---- a/.gitlab-ci/fedora.Dockerfile	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ b/.gitlab-ci/fedora.Dockerfile	(revision 231c3a60650a27f5ce66227177605ea6df063fae)
-@@ -3,7 +3,6 @@
+index af928435..4b6c87a7 100644
+--- a/.gitlab-ci/fedora.Dockerfile
++++ b/.gitlab-ci/fedora.Dockerfile
+@@ -3,7 +3,6 @@ FROM fedora:latest
  RUN dnf -y update \
   && dnf -y install \
      "dnf-command(builddep)" \
@@ -16,21 +10,17 @@ diff --git a/.gitlab-ci/fedora.Dockerfile b/.gitlab-ci/fedora.Dockerfile
      expat-devel \
      git \
      graphviz \
-Index: demo/adwaita-demo.c
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
 diff --git a/demo/adwaita-demo.c b/demo/adwaita-demo.c
---- a/demo/adwaita-demo.c	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ b/demo/adwaita-demo.c	(revision 231c3a60650a27f5ce66227177605ea6df063fae)
+index 0f203e77..3557db6c 100644
+--- a/demo/adwaita-demo.c
++++ b/demo/adwaita-demo.c
 @@ -1,5 +1,3 @@
 -#include "config.h"
 -
  #include <glib/gi18n.h>
  #include <gtk/gtk.h>
  #include <adwaita.h>
-@@ -58,16 +56,24 @@
+@@ -58,16 +56,24 @@ show_about (GSimpleAction *action,
  
    debug_info = adw_demo_generate_debug_info ();
  
@@ -65,14 +55,10 @@ diff --git a/demo/adwaita-demo.c b/demo/adwaita-demo.c
  
    adw_about_window_add_link (ADW_ABOUT_WINDOW (about),
                               _("_Documentation"),
-Index: demo/adwaita-demo.gresources.xml
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
 diff --git a/demo/adwaita-demo.gresources.xml b/demo/adwaita-demo.gresources.xml
---- a/demo/adwaita-demo.gresources.xml	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ b/demo/adwaita-demo.gresources.xml	(revision 231c3a60650a27f5ce66227177605ea6df063fae)
+index 86e6b067..acea0eb3 100644
+--- a/demo/adwaita-demo.gresources.xml
++++ b/demo/adwaita-demo.gresources.xml
 @@ -3,7 +3,6 @@
    <gresource prefix="/org/gnome/Adwaita1/Demo">
      <file preprocess="xml-stripblanks" alias="icons/scalable/apps/org.gnome.Adwaita1.Demo.svg">data/org.gnome.Adwaita1.Demo.svg</file>
@@ -81,15 +67,11 @@ diff --git a/demo/adwaita-demo.gresources.xml b/demo/adwaita-demo.gresources.xml
      <file preprocess="xml-stripblanks">icons/scalable/actions/avatar-delete-symbolic.svg</file>
      <file preprocess="xml-stripblanks">icons/scalable/actions/avatar-save-symbolic.svg</file>
      <file preprocess="xml-stripblanks">icons/scalable/actions/clock-alarm-symbolic.svg</file>
-Index: demo/data/meson.build
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
 diff --git a/demo/data/meson.build b/demo/data/meson.build
---- a/demo/data/meson.build	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ b/demo/data/meson.build	(revision 231c3a60650a27f5ce66227177605ea6df063fae)
-@@ -34,25 +34,6 @@
+index 5d176351..12928ac2 100644
+--- a/demo/data/meson.build
++++ b/demo/data/meson.build
+@@ -34,25 +34,6 @@ appdata_config = configuration_data()
  appdata_config.set('BUILD_VERSION', meson.project_version())
  appdata_config.set('BUILD_DATE', today)
  
@@ -115,15 +97,11 @@ diff --git a/demo/data/meson.build b/demo/data/meson.build
  install_data(
    'org.gnome.Adwaita1.Demo.svg',
    install_dir: datadir / 'icons' / 'hicolor' / 'scalable' / 'apps'
-Index: demo/meson.build
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
 diff --git a/demo/meson.build b/demo/meson.build
---- a/demo/meson.build	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ b/demo/meson.build	(revision 231c3a60650a27f5ce66227177605ea6df063fae)
-@@ -3,7 +3,6 @@
+index ca04e31f..d01e1651 100644
+--- a/demo/meson.build
++++ b/demo/meson.build
+@@ -3,7 +3,6 @@ if get_option('examples')
  subdir('data')
  
  demo_config_data = configuration_data()
@@ -131,7 +109,7 @@ diff --git a/demo/meson.build b/demo/meson.build
  demo_config_data.set_quoted('ADW_DEMO_VCS_TAG', '@VCS_TAG@')
  
  demo_config_h = vcs_tag(
-@@ -19,8 +18,6 @@
+@@ -19,8 +18,6 @@ adwaita_demo_resources = gnome.compile_resources(
     'adwaita-demo.gresources.xml',
  
     c_name: 'adw',
@@ -140,14 +118,10 @@ diff --git a/demo/meson.build b/demo/meson.build
  )
  
  adwaita_demo_sources = [
-Index: src/adw-about-window.c
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
 diff --git a/src/adw-about-window.c b/src/adw-about-window.c
---- a/src/adw-about-window.c	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ b/src/adw-about-window.c	(revision 231c3a60650a27f5ce66227177605ea6df063fae)
+index e861dcd0..59a20aa2 100644
+--- a/src/adw-about-window.c
++++ b/src/adw-about-window.c
 @@ -6,7 +6,6 @@
  
  #include "config.h"
@@ -206,58 +180,20 @@ diff --git a/src/adw-about-window.c b/src/adw-about-window.c
  };
  /* Copied from GTK 4 for consistency with GtkAboutDialog. */
  /* Keep this static assertion updated with the last element of the enumeration,
-@@ -388,13 +386,6 @@
-   return GDK_EVENT_STOP;
- }
- 
--static gboolean
--get_release_for_version (AsRelease  *rel,
--                         const char *version)
--{
--  return !g_strcmp0 (as_release_get_version (rel), version);
--}
--
- static void
- update_credits_legal_group (AdwAboutWindow *self)
+@@ -392,7 +390,8 @@ static gboolean
+ get_release_for_version (AsRelease  *rel,
+                          const char *version)
  {
-@@ -1919,170 +1910,6 @@
-   return g_object_new (ADW_TYPE_ABOUT_WINDOW, NULL);
+-  return !g_strcmp0 (as_release_get_version (rel), version);
++  printf("appstream is disabled, exiting");
++  exit(1);
  }
  
--/**
-- * adw_about_window_new_from_appdata:
-- * @resource_path: The resource to use
-- * @release_notes_version: (nullable): The version to retrieve release notes for
-- *
-- * Creates a new `AdwAboutWindow` using AppStream metadata.
-- *
-- * This automatically sets the following properties with the following AppStream
-- * values:
-- *
-- * * [property@AboutWindow:application-icon] is set from the `<id>`
-- * * [property@AboutWindow:application-name] is set from the `<name>`
-- * * [property@AboutWindow:developer-name] is set from the `<developer_name>`
-- * * [property@AboutWindow:version] is set from the version of the latest release
-- * * [property@AboutWindow:website] is set from the `<url type="homepage">`
-- * * [property@AboutWindow:support-url] is set from the `<url type="help">`
-- * * [property@AboutWindow:issue-url] is set from the `<url type="bugtracker">`
-- * * [property@AboutWindow:license-type] is set from the `<project_license>`
-- *   If the license type retrieved from AppStream is not listed in
-- *   [enum@Gtk.License], it will be set to `GTK_LICENCE_CUSTOM`.
-- *
-- * If @release_notes_version is not `NULL`,
-- * [property@AboutWindow:release-notes-version] is set to match it, while
-- * [property@AboutWindow:release-notes] is set from the AppStream release
-- * description for that version.
-- *
-- * Returns: the newly created `AdwAboutWindow`
-- *
-- * Since: 1.4
-- */
--GtkWidget *
--adw_about_window_new_from_appdata (const char *resource_path,
--                                   const char *release_notes_version)
--{
+ static void
+@@ -1953,134 +1952,8 @@ GtkWidget *
+ adw_about_window_new_from_appdata (const char *resource_path,
+                                    const char *release_notes_version)
+ {
 -  AdwAboutWindow *self;
 -  GFile *appdata_file;
 -  char *appdata_uri;
@@ -386,39 +322,15 @@ diff --git a/src/adw-about-window.c b/src/adw-about-window.c
 -  g_free (appdata_uri);
 -
 -  return GTK_WIDGET (self);
--}
--
- /**
-  * adw_about_window_get_application_icon: (attributes org.gtk.Method.get_property=application-icon)
-  * @self: an about window
-@@ -3380,42 +3207,3 @@
- 
-   gtk_window_present (GTK_WINDOW (window));
++  printf("appstream is disabled, exiting");
++  exit(1);
  }
--
--/**
-- * adw_show_about_window_from_appdata:
-- * @parent: (nullable): the parent top-level window
-- * @resource_path: The resource to use
-- * @release_notes_version: (nullable): The version to retrieve release notes for
-- * @first_property_name: the name of the first property
-- * @...: value of first property, followed by more pairs of property name and
-- *   value, `NULL`-terminated
-- *
-- * A convenience function for showing an application’s about window from
-- * AppStream metadata.
-- *
-- * See [ctor@AboutWindow.new_from_appdata] for details.
-- *
-- * Since: 1.4
-- */
--void
--adw_show_about_window_from_appdata (GtkWindow  *parent,
--                                    const char *resource_path,
--                                    const char *release_notes_version,
--                                    const char *first_property_name,
--                                    ...)
--{
+ 
+ /**
+@@ -3404,18 +3277,6 @@ adw_show_about_window_from_appdata (GtkWindow  *parent,
+                                     const char *first_property_name,
+                                     ...)
+ {
 -  GtkWidget *window;
 -  va_list var_args;
 -
@@ -433,48 +345,27 @@ diff --git a/src/adw-about-window.c b/src/adw-about-window.c
 -    gtk_window_set_transient_for (GTK_WINDOW (window), parent);
 -
 -  gtk_window_present (GTK_WINDOW (window));
--}
-Index: src/adw-about-window.h
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
++  printf("appstream is disabled, exiting");
++  exit(1);
+ }
 diff --git a/src/adw-about-window.h b/src/adw-about-window.h
---- a/src/adw-about-window.h	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ b/src/adw-about-window.h	(revision 231c3a60650a27f5ce66227177605ea6df063fae)
-@@ -25,10 +25,6 @@
- ADW_AVAILABLE_IN_1_2
- GtkWidget *adw_about_window_new (void) G_GNUC_WARN_UNUSED_RESULT;
+index a8ed33df..1f4f2143 100644
+--- a/src/adw-about-window.h
++++ b/src/adw-about-window.h
+@@ -17,6 +17,8 @@
  
--ADW_AVAILABLE_IN_1_4
--GtkWidget *adw_about_window_new_from_appdata (const char *resource_path,
--                                              const char *release_notes_version) G_GNUC_WARN_UNUSED_RESULT;
--
- ADW_AVAILABLE_IN_1_2
- const char *adw_about_window_get_application_name (AdwAboutWindow *self);
- ADW_AVAILABLE_IN_1_2
-@@ -175,12 +171,5 @@
- void adw_show_about_window (GtkWindow  *parent,
-                             const char *first_property_name,
-                             ...);
--
--ADW_AVAILABLE_IN_1_4
--void adw_show_about_window_from_appdata (GtkWindow  *parent,
--                                         const char *resource_path,
--                                         const char *release_notes_version,
--                                         const char *first_property_name,
--                                         ...);
+ G_BEGIN_DECLS
  
- G_END_DECLS
-Index: src/meson.build
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
++G_DECLARE_DERIVABLE_TYPE (AsRelease, as_release, AS, RELEASE, GObject)
++
+ #define ADW_TYPE_ABOUT_WINDOW (adw_about_window_get_type())
+ 
+ ADW_AVAILABLE_IN_1_2
 diff --git a/src/meson.build b/src/meson.build
---- a/src/meson.build	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ b/src/meson.build	(revision 231c3a60650a27f5ce66227177605ea6df063fae)
-@@ -286,20 +286,12 @@
+index 1366bcc1..6ff74a55 100644
+--- a/src/meson.build
++++ b/src/meson.build
+@@ -286,20 +286,12 @@ gtk_dep = dependency('gtk4',
      'build-tests=false',
    ],
  )
@@ -495,27 +386,22 @@ diff --git a/src/meson.build b/src/meson.build
    cc.find_library('m', required: false),
  ]
  
-Index: subprojects/appstream.wrap
-===================================================================
 diff --git a/subprojects/appstream.wrap b/subprojects/appstream.wrap
 deleted file mode 100644
---- a/subprojects/appstream.wrap	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ /dev/null	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
+index 4262a04b..00000000
+--- a/subprojects/appstream.wrap
++++ /dev/null
 @@ -1,5 +0,0 @@
 -[wrap-git]
 -directory = appstream
 -url = https://github.com/ximion/appstream.git
 -revision = main
 -depth = 1
-Index: tests/meson.build
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
 diff --git a/tests/meson.build b/tests/meson.build
---- a/tests/meson.build	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ b/tests/meson.build	(revision 231c3a60650a27f5ce66227177605ea6df063fae)
-@@ -2,13 +2,6 @@
+index b7bdbb90..2f44a157 100644
+--- a/tests/meson.build
++++ b/tests/meson.build
+@@ -2,13 +2,6 @@ if get_option('tests')
  
  subdir('manual')
  
@@ -529,7 +415,7 @@ diff --git a/tests/meson.build b/tests/meson.build
  test_env = [
    'G_TEST_SRCDIR=@0@'.format(meson.current_source_dir()),
    'G_TEST_BUILDDIR=@0@'.format(meson.current_build_dir()),
-@@ -21,6 +14,7 @@
+@@ -21,6 +14,7 @@ test_env = [
  
  test_cflags = [
    '-DADW_LOG_DOMAIN="Adwaita"',
@@ -537,7 +423,7 @@ diff --git a/tests/meson.build b/tests/meson.build
  ]
  
  test_link_args = []
-@@ -83,13 +77,7 @@
+@@ -83,13 +77,7 @@ test_names = [
  ]
  
  foreach test_name : test_names
@@ -552,12 +438,11 @@ diff --git a/tests/meson.build b/tests/meson.build
                         c_args: test_cflags,
                      link_args: test_link_args,
                   dependencies: libadwaita_deps + [libadwaita_dep],
-Index: tests/org.gnome.Adwaita1.Test.metainfo.xml
-===================================================================
 diff --git a/tests/org.gnome.Adwaita1.Test.metainfo.xml b/tests/org.gnome.Adwaita1.Test.metainfo.xml
 deleted file mode 100644
---- a/tests/org.gnome.Adwaita1.Test.metainfo.xml	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ /dev/null	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
+index 8b4af591..00000000
+--- a/tests/org.gnome.Adwaita1.Test.metainfo.xml
++++ /dev/null
 @@ -1,29 +0,0 @@
 -<?xml version="1.0" encoding="UTF-8"?>
 -<component type="desktop-application">
@@ -588,14 +473,10 @@ deleted file mode 100644
 -  <url type="bugtracker">https://gitlab.gnome.org/GNOME/libadwaita/issues</url>
 -  <url type="help">http://www.gnome.org/friends/</url>
 -</component>
-Index: tests/test-about-window.c
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
 diff --git a/tests/test-about-window.c b/tests/test-about-window.c
---- a/tests/test-about-window.c	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ b/tests/test-about-window.c	(revision 231c3a60650a27f5ce66227177605ea6df063fae)
+index 1deda1ee..667a4443 100644
+--- a/tests/test-about-window.c
++++ b/tests/test-about-window.c
 @@ -8,49 +8,6 @@
  
  #include <adwaita.h>
@@ -646,7 +527,7 @@ diff --git a/tests/test-about-window.c b/tests/test-about-window.c
  static void
  test_adw_about_window_create (void)
  {
-@@ -143,16 +100,10 @@
+@@ -143,16 +100,10 @@ int
  main (int   argc,
        char *argv[])
  {
@@ -663,12 +544,11 @@ diff --git a/tests/test-about-window.c b/tests/test-about-window.c
  
    return g_test_run ();
  }
-Index: tests/tests.gresources.xml
-===================================================================
 diff --git a/tests/tests.gresources.xml b/tests/tests.gresources.xml
 deleted file mode 100644
---- a/tests/tests.gresources.xml	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
-+++ /dev/null	(revision 3d9c034fbffd5452dc39a2724754a699e315bbb7)
+index 23e90ea8..00000000
+--- a/tests/tests.gresources.xml
++++ /dev/null
 @@ -1,6 +0,0 @@
 -<?xml version="1.0" encoding="UTF-8"?>
 -<gresources>
